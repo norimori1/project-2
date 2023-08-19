@@ -17,7 +17,8 @@ func main() {
 	)
 
 	srv := http.Server{
-		Addr: "localhost:8080",
+		Addr:    "localhost:8080",
+		Handler: http.HandlerFunc(helloWorld),
 	}
 
 	fmt.Println("Starting at :8080")
@@ -39,4 +40,9 @@ func main() {
 	}
 
 	fmt.Println("Done.")
+}
+
+func helloWorld(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("%+v\n", r)
+	w.Write([]byte("Hello World."))
 }
